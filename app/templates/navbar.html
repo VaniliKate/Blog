@@ -1,0 +1,73 @@
+<!-- <ul class="nav navbar-nav navbar-right">
+    {% if current_user.is_authenticated %}
+    <li style="color:white;padding:15px;">{{current_user.username}}</li>
+    <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+    {% else %}
+    <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+    {%endif%}
+  </ul> -->
+
+<link href="https://fonts.googleapis.com/css?family=Cute+Font|Turret+Road&display=swap" rel="stylesheet">
+
+<div class="container-fluid" id="top">
+  <div class="row">
+    <div class="col-md-5"></div>
+    <div class="col-md-2" id="header">
+      <img src="/static/images/bg.jpeg">
+    </div>
+    <div class="col-md-5"></div>
+
+  </div>
+</div>
+<div class="container">
+<div class="row" col-md-12>
+  <div class="col-md-12">
+<nav class="mb-1 navbar navbar-expand-lg navbar-light info-color" id="navy">
+  <a href="{{ url_for('main.index') }}" class="navbar-item">HOME</a>
+  
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('auth.register') }}" class="navbar-item">
+          <i class="signup"></i>SIGN-UP</a>
+        {% endif %}
+      </li>
+
+      <li class="nav-item">
+        {% if not current_user.is_authenticated %}
+
+        <a href="{{ url_for('auth.login') }}" class="navebar-item">
+          <i class="login"></i> LOGIN</a>
+        {% endif %}
+      </li>
+
+
+
+      <li class="nav-item">
+        {% if current_user.is_authenticated %}
+        <a href ="{{url_for('main.new_tale') }}" class = "navbar-item">
+          <i class="user_account"></i> NEW TALE
+          
+        </a>
+        <a href ="{{url_for('main.profile', name = current_user.username)}}" class = "navbar-item">
+          <i class="user_account"></i> PROFILE
+          <span class="sr-only">(current)</span>
+        </a> 
+        {% endif %}
+
+      </li>
+      <li class="nav-item">
+        {% if current_user.is_authenticated %}
+        <a href="{{url_for('auth.logout')}}" class="navbar-item">
+          <i class="fab fa-instagram"></i> LOGOUT</a>
+        {% endif%}
+      </li>
+
+    </ul>
+  </div>
+</nav>
+</div>
+</div>
+</div>

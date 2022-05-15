@@ -1,0 +1,65 @@
+{% extends 'base.html'%}
+{% block content%}
+<link href="https://fonts.googleapis.com/css?family=Rajdhani|Ropa+Sans|Unna&display=swap" rel="stylesheet">
+<div class="container">
+    <div class="row">
+        <div class="col-md-2" id="sidebar">
+            <table>
+                <tr>
+                    <td class="b">
+                        <img src="/static/images/b.png">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="l">
+                            <img src="/static/images/l.png">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="o">
+                            <img src="/static/images/o.png">
+                    </td>
+                </tr>
+                <tr>
+                    <td class="g">
+                            <img src="/static/images/g.png">
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-8">
+
+            {% for tale in tales %}
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>
+                            Title: {{tale.title}}
+                    </h4>
+                </div>
+                <div class="card-body">
+
+
+                    <p class="card-text"> {{tale.blog}}</p>
+                    <p class="card-text">By: {{tale.author}}</p>
+                </div>
+                <div class="card-footer">
+                    
+                </div>
+                </div>
+    
+                {% endfor %}
+        </div>
+        
+        <div class="col-md-2" id="quotes">
+            <h1>Random Quotes</h1>
+            <p>{{quotes.quote}}</p>
+            <p>By: {{quotes.author}}</p>
+            <a href="{{quotes.permalink}}">
+                <p>View</p>
+            </a>
+        </div>
+    </div>
+</div>
+
+{% endblock%}

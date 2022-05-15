@@ -1,0 +1,56 @@
+body {
+    background-color: rgb(192, 193, 194);
+}
+#navy {
+    background-color: rgb(2, 76, 82);
+    /* color: black; */
+}
+#navy a {
+    color:black;
+    padding:10px;
+}
+
+#top {
+    background-color: black;
+}
+
+#header>img {
+    height:150px;
+
+}
+#sidebar {
+    background-color:black;
+}
+#blog {
+    background-color:black;
+}
+.b {
+    background-image:url('/static/images/b.png'); 
+}
+
+.l {
+    background-image:url('/static/images/l.png');
+}
+
+.o {
+    background-image:url('/static/images/o.png');
+}
+
+.g {
+    background-image:url('/static/images/g.png');
+}
+/* #sidebar {
+    background-image:url('/static/images/340.png');
+    width: 200px;
+    height:400px;
+} */
+
+#quotes {
+    background-color: black;
+    color: white;
+    font-family: 'Rajdhani', sans-serif;
+}
+#quotes h1 {
+    color:rgb(2, 76, 82);
+    font-family: 'Ropa Sans', sans-serif;
+}
