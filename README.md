@@ -1,8 +1,8 @@
-# bloGGG
+# vanili blog
 
 This site allows writers to pour themselves out and write blogs and readers to read, engage and react to the blogs. Also shows an inspirational quote every time the site is loaded.
 
-#### By **Grishon Gikima**
+#### By **Kate Vanili**
 
 ## Description
 
@@ -11,11 +11,11 @@ This site allows writers to pour themselves out and write blogs and readers to r
 ## Setup/Installation Requirements
 
 ### Requirements
-* Postgresql -> See https://www.postgresql.org/download/ to download for your platform of choice.
+* Postgresql
 
 ### Setup
-* Clone the repo `git clone https://github.com/GrishonNganga/bloGGG.git`
-* Move into the directory `cd bloGGG`
+* Clone the repo `git clone https://github.com/VaniliKate/Blog.git`
+* Move into the directory `cd Blog`
 * Create a virtual environment `python -m venv virtual`
 * Open `start.sh` file and replace what's inside the <> with your email address, password and a `SQLALCHEMY_DATABASE_URI` from psql db created.\
 See more on how to construct `SQLALCHEMY_DATABASE_URI` here -> https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format
@@ -23,24 +23,17 @@ See more on how to construct `SQLALCHEMY_DATABASE_URI` here -> https://flask-sql
 * Run `python manage.py db migrate` to make the psql database migrations.
 * Run `python manage.py db upgrade` to upgrade the psql db version to the latest with the migrated changes.
 * To run the application `./start.sh`
-## Known Bugs
-
-There are no known bugs atm. Get in touch if you discover any.
 ## Technologies Used
 
 * HTML
 * CSS
 * Bootstrap
-* Python
 * Flask
-* Heroku
 * Postgresql
-## Support and contact details
 
-Reach out to me over email grishon.nganga01@gmail.com
 ### MIT License
 
-Copyright (c) 2020 bloGGG
+Copyright (c) 2022 Blog
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -59,4 +52,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-Copyright (c) {2020} **Grishon Gikima**
+Copyright (c) {2022} **Kate Vanili**
