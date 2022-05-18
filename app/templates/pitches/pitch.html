@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/pitch.css')}}">
+{% endblock %}
+{% block scripts %}
+{{ super() }}
+
+<script src="{{url_for('static', filename = 'js/pitch.js')}}"></script>
+<script>
+    pitch_id = '{{pitch.id}}'
+    upvoted = '{{ upvoted }}'
+    downvoted = '{{ downvoted }}'
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 col-sm-6">
+            <div class="alert alert-danger action-not-performed-error">
+                You need to be logged in to perform that action.
+            </div>
+            <div class="card pitch">
+                <div class="row pt-4 pl-4">
+                    <div class="col-2 col-sm-1">
+                        <span class="material-icons pitch-img">account_circle</span>
+                    </div>
+                    <div class="col pitch-owner">
+                        {{ pitch.user.f_name }} {{ pitch.user.l_name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col pitch-message">
+                        {{pitch.message}}
+                    </div>
+                </div>
+                <div class="row thumbs pb-4">
+                    <div class="col-3 col-sm-2">
+                        <span class="material-icons" id="pitch-up">thumb_up_alt</span>
+                        <div class="row">
+                            <div class="col up-counter">
+                                {{ upvotes }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 col-sm-2 thumb">
+                        <span class="material-icons" id="pitch-down">thumb_down_alt</span>
+                        <div class="row">
+                            <div class="col down-counter">
+                                {{ downvotes }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3 col-sm-2 thumb">
+                        <span class="material-icons" id="pitch-down">comment</span>
+                        <div class="row">
+                            <div class="col comments-count">
+                                {{comments_count}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <form action="{{ url_for('pitch.show_pitch',  id = pitch.id) }}" method="POST" id="comment_form">
+                {{ comment_form.csrf_token}}
+                <div class="row">
+                    <div class="col-10">
+                        <div class="form-group">
+                            {{ comment_form.comment(class = 'form-control', rows = '1', placeholder = 'Make your pitch', id = 'comment-box')}}
+                        </div>
+                        
+                        {% for error in comment_form.errors['comment'] %}
+                        <div class="alert alert-error">
+                            {{error}}
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-remove-style"><span class="material-icons mt-n2 ml-n4 ml-sm-n1">send</span></button>
+                        </div>
+                    </div>
+                </div> 
+            </form>
+        </div>
+    </div>    
+    <div class="row">
+        <div class="col">
+            <h3 class=" mt-5 mb-4">Comments</h3>
+        </div>
+    </div>
+    <div class="all-comments container">
+        {% for comment in comments %}
+    <div class="row">
+        <div class=" col-12 col-sm-6 pitch card mb-3">
+            <div class="row pt-4 pl-4">
+                <div class="col-2 col-sm-1">
+                    <span class="material-icons pitch-img">account_circle</span>
+                </div>
+                <div class="col pitch-owner">
+                     {{ comment.user.f_name}} {{ comment.user.l_name }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col pitch-message">
+                    {{ comment.comment}}
+                </div>
+            </div>
+            <div class="row thumbs pb-4">
+                <div class="col-3 col-sm-2">
+                    <span class="material-icons" id="pitch-up">thumb_up_alt</span>
+                    <div class="row">
+                        <div class="col up-counter">
+                             0 
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-2 thumb">
+                    <span class="material-icons" id="pitch-down">thumb_down_alt</span>
+                    <div class="row">
+                        <div class="col down-counter">
+                            0
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3 col-sm-2 thumb">
+                    <span class="material-icons" id="pitch-down">comment</span>
+                    <div class="row">
+                        <div class="col down-counter">
+                            0
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    </div>
+    
+    
+</div>
+{% endblock %}

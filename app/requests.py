@@ -1,17 +1,12 @@
-import urllib.request, json
-from .models import Tale
-import requests, json
-
-base_url = None
-
-
+import urllib, json
 def configure_request(app):
-    global base_url
-    base_url = app.config['BASE_URL']
+    global quote_api 
+    quote_api = app.config['QUOTE_API']
 
-def  random_quotes():
-    request = requests.get('http://quotes.stormconsultancy.co.uk/random.json')
-    quotes = request.json()
-
-
-    return quotes
+def quote_of_the_day():
+    quote_url = quote_api.format('qod')
+    
+    with urllib.request.urlopen(quote_url) as quotes_data:
+        quotes = json.loads(quotes_data.read())
+        
+    return(quotes['contents']['quotes'][0]['quote'])

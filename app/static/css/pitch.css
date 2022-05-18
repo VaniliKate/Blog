@@ -1,0 +1,39 @@
+.pitch{
+    width: 100%;
+    margin-bottom: 5%;
+}
+.pitch-img{
+    font-size: 48px;
+}
+.pitch-owner{
+    margin-left: -1.5%;
+    padding-top: 12px;
+}
+.pitch-message{
+    margin-left: 15%;
+    padding-bottom: 15px;
+}
+.thumbs{
+    margin-left: 12%;
+}
+.pitch-up{
+    color: #5df212;
+}
+.pitch-down{
+    color: red;
+}
+.action-not-performed-error{
+    display: none;
+}
+.btn-remove-style:focus{
+    outline: none;
+}
+@media screen and (min-width: 500px){
+    .pitch-owner{
+        margin-left: 2%;
+        
+    }
+    .pitch-message{
+        margin-left: 10%;
+    }
+}

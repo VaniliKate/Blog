@@ -1,29 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import Required, Email, EqualTo
-from wtforms import ValidationError
-from ..models import User
+from wtforms import BooleanField, StringField, PasswordField,SubmitField, validators
+from wtforms.validators import Required, Email, EqualTo, Length
+
+class RegisterForm(FlaskForm):
+    f_name = StringField('First Name', validators = [Required()])
+    l_name = StringField('Last Name',validators = [Required()])
+    email = StringField('Email Address', validators = [Required(), Email()])
+    password = PasswordField('Enter Password', validators = [ Required(), Length(min=8, max=20), EqualTo('confirm', message='Passwords must match.') ])
+    confirm = PasswordField('Confirm Password',validators = [ Required() ])
+    submit = SubmitField('Sign Up')
 
 
-
-class subscriptionForm(FlaskForm):
-    email = StringField('Your Email Address', validators = [Required(), Email()])
-    username = StringField('Enter your username', validators = [Required()])
-    password = PasswordField('Password', validators = [Required(), EqualTo('password_confirm')])
-    password_confirm = PasswordField('Confirm Passwords', validators = [Required()])
-    submit = SubmitField('Subscribe')
-
-    def validate_email(self,data_field):
-        if User.query.filter_by(email = data_field.data).first():
-            raise ValidationError('There is an account with that email')
-
-    def validate_username(self, data_field):
-        if User.query.filter_by(username = data_field.data).first():
-            raise ValidationError('That username is taken')
-
-
-class loginForm(FlaskForm):
-    email = StringField('Your Email Address', validators = [Required(), Email()])
-    password = PasswordField('Password', validators = [Required()])
-    remember = BooleanField('Remember me')
+class LoginForm(FlaskForm):
+    email = StringField('Email Address', validators = [Required(), Email()])
+    password = PasswordField('Confirm Password',validators = [ Required() ])
     submit = SubmitField('Login')

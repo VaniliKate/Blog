@@ -1,0 +1,26 @@
+.categories{
+    margin-left: 0%;
+}
+.category{
+    padding: 5%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left: 7%;
+    text-align: center;
+    font-size: 24px;
+    color: initial;
+}
+
+.category a:hover{
+    color: #5df212;
+}
+
+
+@media screen and (min-width: 600px){
+    .categories{
+        margin-left: 10%;
+    }
+    .catgory{
+        margin-bottom: 5%;
+    }
+}

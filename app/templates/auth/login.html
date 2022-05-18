@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename = 'css/login.css')}}">
+{% endblock %}
+{% block content %}
+<div class="container login-container">
+    
+<div class="row">
+    <div class="col">
+        <div class="row">
+            <div class="col login-img ml-3">
+                <img src="{{url_for('static', filename = './images/login.svg')}}" alt="">
+            </div>
+            <div class="col-12 col-sm-4 login-form">
+                <div class="row mt-5 mb-4">
+                    <div class="col">
+                        <h2>Log in.</h2>
+                    </div>
+                    <div class="col">
+                        <div class="ml-3">
+                            or <a href="{{url_for('auth.register')}}"> &nbsp;&nbsp; <span class="signup-text">Sign up</span></a>
+                        </div>
+                    </div>
+                </div>             
+                    <form method="POST" action="/login">
+                        {{ login_form.csrf_token }}
+                        <div class="form-group">
+                        {{ login_form.email(class = 'form-control', placeholder = 'Email') }}
+                        
+                        </div>
+                        <div class="form-group">
+                            {{ login_form.password(class = 'form-control', placeholder = 'Password') }}
+                            {% for errors in login_form.errors['email'] %}
+                                <div class="alert alert-danger">
+                                    {{ errors }}
+                                </div>
+                        {% endfor %}
+                        {% for errors in login_form.errors['password'] %}
+                                <div class="alert alert-danger">
+                                    {{ errors }}
+                                </div>
+                        {% endfor %}
+                        </div>
+                        <div class="form-group">
+                            {{ login_form.submit(class= 'btn btn-success') }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

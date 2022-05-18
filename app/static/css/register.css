@@ -1,0 +1,28 @@
+.register-container{
+    margin-top: 7%;
+}
+.form-control, .btn-success{
+    font-size: 16px;
+}
+.register-img img{
+    width: 50%;
+}
+.register-img{
+    margin-top: 8%;
+}
+.btn-success{
+    background-color: #5df212;
+    border-color: #5df212 ;
+}
+.login-text{
+    color: #5df212;
+}
+.register-img{
+    display: none;
+}
+
+@media screen and (min-width: 500px){
+    .register-img{
+        display: block;
+    }
+}

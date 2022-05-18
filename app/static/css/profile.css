@@ -1,0 +1,27 @@
+.profile-img{
+    font-size: 112px;
+}
+.text-title{
+    font-size: 24px;
+}
+
+.btn-success a, .btn-danger a{
+    color: white;
+}
+.btn-success, .btn-danger{
+    color: white;
+    font-size: 16px;
+}
+.pitch-link, .pitch-txt {
+    color: black;
+}
+
+.btn-success:hover{
+    color: white;
+    background-color: black;
+
+}
+.btn-success{
+    background-color: black;
+    border-color: black;
+}

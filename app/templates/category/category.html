@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static', filename='css/category.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row pitches">
+        {% if pitches_count > 0 %}
+        {% for pitch in pitches %}
+        <div class="col-12 col-sm-4">
+            <a href="{{url_for('pitch.show_pitch', id= pitch.id)}}">
+                <div class="pitch">
+                    {{pitch.message}}
+                    <p class="mt-2 pitch-writer">{{ pitch.user.f_name }} {{ pitch.user.l_name }}</p>
+                </div>
+            </a>
+        </div>  
+        {% endfor %}  
+        {% else %}
+        <div class="container">
+            <h1 class="text-title">Nothing here</h1>
+            <div class="nada-img">
+                <img src="{{url_for('static', filename = './images/nada.svg')}}" alt="">
+            </div>
+        </div>
+        {% endif %}
+        
+    </div>
+
+</div>
+
+
+{% endblock %}

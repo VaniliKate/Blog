@@ -1,0 +1,34 @@
+.login-container{
+    margin-top: 7%;
+}
+.form-control, .btn-success{
+    font-size: 16px;
+}
+.login-img img{
+    width: 30%;
+}
+.login-img{
+    margin-top: 8%;
+    margin-left: 5%;
+}
+.btn-success{
+    background-color: #5df212;
+    border-color: #5df212 ;
+}
+.signup-text{
+    color: #5df212;
+}
+.login-img{
+    display: none;
+}
+.login-form{
+    margin-top: 20% ;
+}
+@media screen and (min-width: 500px){
+    .login-img{
+        display: block;
+    }
+    .login-form{
+        margin-top: 5% ;
+    }
+}
