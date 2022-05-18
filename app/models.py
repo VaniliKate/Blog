@@ -1,76 +1,78 @@
+from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from . import login_manager
+from datetime import datetime
 
-from . import db
 
-class User(UserMixin,db.Model):
+class Quote():
+    def __init__(self, author, text):
+        self.author=author
+        self.text=text
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+    
+
+class User(UserMixin, db.Model):
+    __tablename__='users'
     id = db.Column(db.Integer, primary_key=True)
-    f_name = db.Column(db.String(50), nullable = False)
-    l_name = db.Column(db.String(50), nullable = False)
-    email = db.Column(db.String(80), unique = True)
-    password_hash = db.Column(db.String(100))
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+    about = db.Column(db.String(255))
+    avatar = db.Column(db.String())
+    password_encrypt=db.Column(db.String(128))
+    pitches = db.relationship('Pitches', backref='user', lazy='dynamic')
+    comments = db.relationship('Comments', backref='comments', lazy='dynamic')
 
-    @property
+    @property   #write-only
     def password(self):
-        raise AttributeError('Password not readable')
+        raise AttributeError('You can only read this attribute')
 
     @password.setter
     def password(self, password):
-        self.password_hash = generate_password_hash(password)
+        self.password_encrypt = generate_password_hash(password)
 
-    def verify_password(self, password):
-        return check_password_hash(self.password_hash, password)
-    
+    def check_password(self, password):
+        return check_password_hash(self.password_encrypt, password)
 
     def __repr__(self):
-        
-        return '<User %r>' % self.f_name
+        return f'User{self.username}'
 
-class Pitch(db.Model):
+
+class Pitches(db.Model):
+    __tablename__='pitches'
     id = db.Column(db.Integer, primary_key=True)
-    message = db.Column(db.String(1000), nullable = False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-
-    user = db.relationship('User', backref = 'pitches', lazy = True)
-    category = db.relationship('Category', backref = 'categories', lazy = True)
-
-    def __repr__(self):
-        
-        return '<Pitch %r>' % self.message
-
-
-class Category(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(20))
+    text = db.Column(db.String)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
+    comments = db.relationship('Comments', backref='pitch', lazy='dynamic')
+    
+    def save_pitch(self):
+        db.session.add(self)
+        db.session.commit()
 
     def __repr__(self):
-        
-        return '<Category %r>' % self.name
-
-class Upvote(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    pitch = db.relationship('Pitch', backref = 'upvotes', lazy = True)
-    user = db.relationship('User', backref = 'upvotes', lazy = True)
+        return f'Pitches{self.text}'
 
 
-class Downvote(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+class Comments(db.Model):
+    __tablename__='comments'
+    id = db.Column(db.Integer, primary_key=True)
+    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    comment = db.Column(db.String(), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    def save_comment(self):
+        db.session.add(self)
+        db.session.commit()
 
-    pitch = db.relationship('Pitch', backref = 'downvotes', lazy = True)
-    user = db.relationship('User', backref = 'downvotes', lazy = True)
-
-   
-class Comment(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitch.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    comment = db.Column(db.String(1000))
-
-    pitch = db.relationship('Pitch', backref = 'comments', lazy = True)
-    user = db.relationship('User', backref = 'comments', lazy = True)
+    @classmethod
+    def get_comments(cls,pitch_id):
+        comments = Comments.query.filter_by(pitch_id=pitch_id)
+        return comments
+    
+    def __repr__(self):
+        return f'Comments:{self.comment}'

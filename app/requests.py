@@ -1,12 +1,23 @@
-import urllib, json
-def configure_request(app):
-    global quote_api 
-    quote_api = app.config['QUOTE_API']
+from .models import Quote
+import urllib.request, json
 
-def quote_of_the_day():
-    quote_url = quote_api.format('qod')
+link = 'http://quotes.stormconsultancy.co.uk/random.json'
+
+
+def get_quote():
+    '''
+    '''
+    url = link
     
-    with urllib.request.urlopen(quote_url) as quotes_data:
-        quotes = json.loads(quotes_data.read())
-        
-    return(quotes['contents']['quotes'][0]['quote'])
+    response = urllib.request.urlopen(url)
+    data = json.loads(response.read())
+
+    quote_details=[]
+
+    author = data.get('author')
+    text = data.get('quote')
+
+    new_quote = Quote(author,text)
+    quote_details.append(new_quote)
+
+    return quote_details
