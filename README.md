@@ -1,6 +1,6 @@
 # vanili blog
 
-This site allows writers to pour themselves out and write blogs and readers to read, engage and react to the blogs. Also shows an inspirational quote every time the site is loaded.
+This site allows writers to write blogs and readers to read, engage and react to the blogs. Also shows an inspirational quote every time the site is loaded.
 
 #### By **Kate Vanili**
 
