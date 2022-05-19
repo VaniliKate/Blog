@@ -74,11 +74,15 @@
                     {#                <p class='text-muted'>You can put any information here you'd like.#}
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-light">Quote of the day</li>
-                        <li class="list-group-item">{{ admin.interests }}</li>
-                        <li class="list-group-item list-group-item-light">other</li>
-                        <li class="list-group-item">{{ admin.skills }}</li>
+                        <li class="list-group-item">“Be yourself; everyone else is already taken.”
+                            ― Oscar Wilde </li>
                     </ul>
                     </p>
+                    <h3>Subscribe to our newsletter</h3>
+                    <form class="my-form" action="/subscribe" method="post">
+                        <input type="text" placeholder="Enter your email address" />
+                        <input type="submit" value="Subscribe!">
+                    </form>
                 </div>
             {% endif %}
         </div>
