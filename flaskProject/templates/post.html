@@ -1,0 +1,121 @@
+{% extends "layout.html" %}
+{% block content %}
+    <article class="media content-section">
+        <div class="media-body">
+            <div class="article-metadata">
+                <div class="row">
+                    <div class="col-6">
+                        <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d') }}</small>
+                        <div id="likeNo">{{ post.likes | length }} Likes</div>
+                    </div>
+                    {% if current_user.is_authenticated %}
+                        <div class="col-6 text-right">
+                            <div class="row">
+                                <div class="col-6 text-right">
+                                    <form action="{{ url_for('like', post_id=post.id) }}" method="post">
+                                        <button type="submit" class="btn btn-light" {% if liked %}
+                                                style="color:blue;" {% endif %}><i class="fa fa-thumbs-up "></i>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div class="col-6 text-left">
+                                    <form action="{{ url_for('tag', post_id=post.id) }}" method="post">
+                                        <button type="submit" class="btn btn-light" {% if saved %}
+                                                style="color:blue;" {% endif %}><i class="fa fa-tag "></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-6"></div>
+                    {% endif %}
+
+                </div>
+
+                {% if current_user.superuser %}
+                    <div>
+                        <a class="btn btn-secondary btn-sm mt-1 mb-1"
+                           href="{{ url_for('update_post', post_id=post.id) }}">Update</a>
+                        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal"
+                                data-target="#deleteModal">Delete
+                        </button>
+                    </div>
+                {% endif %}
+            </div>
+            <img class="text-center" style="width:100%; height:400px;"
+                 src="{{ url_for('static', filename='blog_images/' + post.image) }}">
+            <hr>
+            <h2 class="article-title text-center">{{ post.title }}</h2>
+            <hr>
+            <p class="article-content">{{ post.content }}</p>
+        </div>
+    </article>
+    <!-- Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <form action="{{ url_for('delete_post', post_id=post.id) }}" method="POST">
+                        <input class="btn btn-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        {% if current_user.is_authenticated %}
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Comment</legend>
+                    <div class="form-group">
+                        {{ form.comment.label(class="form-control-label") }}
+
+                        {% if form.comment.errors %}
+                            {{ form.comment(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.comment.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.comment(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
+        {% else %}
+            <div class="mt-4"></div>
+        {% endif %}
+        {% if post.comments %}
+            {% for comment in post.comments %}
+                <article class="media content-section">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <div class="mr-2"><small
+                                    class="text-muted">{{ comment.date_posted.strftime('%Y-%m-%d') }}</small>
+                                | {{ comment.user.fullname() }}</div>
+
+                        </div>
+                        <p class="article-content" style="word-wrap:break-word;">{{ comment.comment }}</p>
+                    </div>
+                </article>
+            {% endfor %}
+        {% else %}
+            <h3 class="text-center">No Comments</h3>
+        {% endif %}
+    </div>
+{% endblock content %}

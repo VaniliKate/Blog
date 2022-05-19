@@ -1,6 +1,0 @@
-Hello, {{user.username}}
-Thank you for signing up. 
-By signing up, you have gained writer privileges. 
-You can now make posts, edit and delete them. You can even delete comments you find offensive.
-
-The stranger.

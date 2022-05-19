@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h4 class="pl-3">Profile</h4>
+    <div class="content-section">
+        <div class="media">
+            <div class="media-body">
+                <h3 class="account-heading">{{ current_user.fullname() }}</h3>
+                <hr>
+                <p class="text-secondary">First Name : {{ current_user.first_name }}</p>
+                <p class="text-secondary">Last Name : {{ current_user.last_name }}</p>
+                <p class="text-secondary">Email : {{ current_user.email }}</p>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

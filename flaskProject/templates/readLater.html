@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h4 class="pl-3">Saved Posts</h4>
+    <hr>
+
+    {% for post in posts %}
+        <article class="media content-section">
+        <img class="rounded-circle article-img mt-3" style="width:160px; height:160px;" src="{{ url_for('static', filename='blog_images/' + post.image) }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d, %H-%M') }}</small> | {{ post.likes | length }} Likes
+                </div>
+                <h2 class="pt-4" style="margin-bottom:-30px;"><a class="article-title" href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                <p class="article-content" style="word-wrap:break-word;">
+                    {% if post.content|length > 75 %}
+                        {{ post.content[:75] }} ...
+                    {% else %}
+                        {{ post.content }}
+                    {% endif %}
+            </p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}

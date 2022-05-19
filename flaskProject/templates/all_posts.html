@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="row pt-3 pb-3 pl-5">
+        <div class="col-12 pl-5 ml-5">
+            <form class="form-inline" method="GET">
+                <div class="form-group mx-sm-3 mb-2">
+                    <input type="text" name="q" class="form-control" placeholder="Title">
+                </div>
+                <button type="submit" class="btn btn-outline-info mb-2">Search</button>
+            </form>
+        </div>
+    </div>
+    <div class="row pt-3">
+        <div class="col-6">
+            <h4 class="pl-3">All Posts</h4>
+        </div>
+        {% if new_order %}
+            <div class="col-6 text-right" style="margin-top:-12px;">
+                Sort By : <a class="btn btn-outline-info" style="width:150px;"
+                             href="{{ url_for('posts') }}?order={{ new_order }}">{{ new_order|upper }}</a>
+            </div>
+        {% endif %}
+    </div>
+    <hr>
+
+    {% for post in posts %}
+        <article class="media content-section">
+        <img class="rounded-circle article-img mt-3" style="width:160px; height:160px;" src="{{ url_for('static', filename='blog_images/' + post.image) }}">
+            <div class="media-body">
+                <div class="article-metadata">
+                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d, %H-%M') }}</small> | {{ post.likes | length }} Likes
+                </div>
+                <h2 class="pt-4" style="margin-bottom:-30px;"><a class="article-title"
+                                                                 href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
+                </h2>
+                <p class="article-content" style="word-wrap:break-word;">
+                    {% if post.content|length > 75 %}
+                        {{ post.content[:75] }} ...
+                    {% else %}
+                        {{ post.content }}
+                    {% endif %}
+                </p>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock content %}
