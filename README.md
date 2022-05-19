@@ -1,55 +1,55 @@
-# Student Number : c1956308
+vanili blog
 
-## Deployed at:
+This site allows writers to write blogs and readers to read, engage and react to the blogs. Also shows an inspirational quote every time the site is loaded.
 
-The site is deployed at :
-[HERE](http://flask-blog-flask-blog-project.apps.cs.cf.ac.uk/) : http://flask-blog-flask-blog-project.apps.cs.cf.ac.uk/
+#### By **Kate Vanili**
 
-### CHECKSUM: b8e68e70822ee4719e299267720a6c51eb0ea367
+## Description
 
-# Main Technologies Used
-Main Technologies used for development of this particular project include:
-1. **Python** (As main programming language for backend)
-2. **MySQL** (Database)
-3. **Flask** (A python micro framework for web application development)
-4. **Html, Css, JavaScript** (For frontend development)
+This site allows writers to pour themselves out and write blogs and readers to read, engage and react to the blogs. Also shows an inspirational quote every time the site is loaded.
 
-## Other Technologies:
-Other technologies used in development include:
-1. *bcrypt* (For encrypting and verifying passwords.)
-2. *Flask-Login* (For authenticating users.)
-3. *WTForms & Flask-WTF* (For form creation and data verification.)
-4. *SQLAlchemy & Flask-SQLAlchemy* (For database interaction using ORM.)
-5. *mysql-connector-python* (For connecting to mysql database.)
-6. *Pillow* (For image manipulation (resizing) )
-7. *email-validator* (Work in coordination with WTForms for email validation.)
-8. *Werkzeug* (For debugging and testing.)
+## Setup/Installation Requirements
 
-# Working
-The application mainly consists on a "flaskProject" module, an app.py file and a config.py file.
-- app.py file only run the flask app
+### Requirements
+* Postgresql
 
-The flaskProject Module has following files and directories:
-- static (A directory containing all static assets like .css files and blog images are uploaded in a subdirectory [blog_images] in this directory).
-- init.py (initializes all variables used throughout the application like database login managers etc.)
-- forms.py (Contains all forms created using WTForms.)
-- models.py (Contain database models)
-- routes.py (Contain all functionalities to be performed when a route is accessed.)
+### Setup
+* Clone the repo `git clone https://github.com/VaniliKate/Blog.git`
+* Move into the directory `cd Blog`
+* Create a virtual environment `python -m venv virtual`
+* Open `start.sh` file and replace what's inside the <> with your email address, password and a `SQLALCHEMY_DATABASE_URI` from psql db created.\
+See more on how to construct `SQLALCHEMY_DATABASE_URI` here -> https://flask-sqlalchemy.palletsprojects.com/en/2.x/config/#connection-uri-format
+* Run `python manage.py db init` to initialize a psql db.
+* Run `python manage.py db migrate` to make the psql database migrations.
+* Run `python manage.py db upgrade` to upgrade the psql db version to the latest with the migrated changes.
+* To run the application `./start.sh`
+## Technologies Used
 
-#### note:
-**Dockerfile** is also included for building and running container on (openshift server)
+* HTML
+* CSS
+* Bootstrap
+* Flask
+* Postgresql
 
-## How to use:
+### MIT License
 
-1. install all required packages from requirements.txt file.`pip install -r requirements.txt`
-2. run app.py `python3 app.py`
+Copyright (c) 2022 Blog
 
-The site currently uses an SQLite database (for convenience as there are built issues in deploying app on openshift) for changing that open init.py file in flaskProject module and uncomment and fill out MySQL settings . Then run config.py file first and then app.py file.
-#### note:
-sqlite database is already loaded with some data for convinience and testing.
-- login credentials for admin 
--- email : iftikharR1@cardiff.ac.uk
--- password : 12345678
-- test account : 
--- email : ellen@gmail.com
--- password : 12345678
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+Copyright (c) {2022} **Kate Vanili**
