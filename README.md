@@ -1,8 +1,8 @@
-####  VANILI BLOG
+####  FLASK BLOG
 
 This site allows writers to write blogs and readers to read, engage and react to the blogs. Also shows a quote every time the site is loaded.
 
-#### By **Kate Vanili**
+#### By **Vanili Kate**
 
 ## Description
 
