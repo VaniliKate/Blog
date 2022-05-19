@@ -28,7 +28,7 @@
         <img class="rounded-circle article-img mt-3" style="width:160px; height:160px;" src="{{ url_for('static', filename='blog_images/' + post.image) }}">
             <div class="media-body">
                 <div class="article-metadata">
-                    <small class="text-muted">{{ post.date_posted.strftime('%Y-%m-%d, %H-%M') }}</small> | {{ post.likes | length }} Likes
+                    <small class="text-muted">{{ post.likes | length }} Likes</small>
                 </div>
                 <h2 class="pt-4" style="margin-bottom:-30px;"><a class="article-title"
                                                                  href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a>
